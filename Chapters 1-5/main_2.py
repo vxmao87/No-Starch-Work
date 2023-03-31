@@ -194,11 +194,11 @@ if "strawberries" in favorite_fruits:
 
 # 5-8, 5-9
 current_username_list = ["spongeisbob", "admin", "sashafierce", "Fastfurious", "aslmaster"]
-# del username_list[0]
-# del username_list[0]
-# del username_list[0]
-# del username_list[0]
-# del username_list[0]
+# del current_username_list[0]
+# del current_username_list[0]
+# del current_username_list[0]
+# del current_username_list[0]
+# del current_username_list[0]
 if current_username_list:
 	for username in current_username_list:
 		if username == "admin":
