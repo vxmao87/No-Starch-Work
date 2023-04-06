@@ -42,6 +42,9 @@ guest_path.write_text(guests_string.lstrip())
 
 # 10-6, 10-7
 def add_numbers(num_1, num_2):
+	"""
+  Adds the two user-inputted values if they are numbers.
+  """
 	try:
 		sum_nums = int(num_1) + int(num_2)
 	except ValueError:
@@ -76,6 +79,9 @@ for pet_file in pet_filenames:
 
 # 10-10
 def count_words(book_contents, word):
+	"""
+  Counts the number of times the given word is in the file.
+  """
 	total_count = 0
 	for book_line in book_contents.splitlines():
 		total_count += book_line.lower().count(word)
@@ -99,6 +105,9 @@ for book in books_list:
 
 # 10-11, 10-12
 def get_favorite_number(path):
+	"""
+  Grabs the person's favorite number if it exists.
+  """
 	if path.exists():
 		contents = path.read_text()
 		favorite_number = json.loads(contents)
@@ -107,12 +116,18 @@ def get_favorite_number(path):
 		return None
 	
 def get_new_fav_number(path):
+	"""
+  Creates a new favorite number for a new user.
+  """
 	favorite_number = input("Give me your favorite number: ")
 	contents = json.dumps(favorite_number)
 	path.write_text(contents)
 	return favorite_number
 
 def display_fav_number():
+	"""
+  Displays the current person's favorite number, or assigns one to them.
+  """
 	favorite_number_path = Path("Chapters 10-11/10/favorite_numbers.json")
 	favorite_number = get_favorite_number(favorite_number_path)
 	if favorite_number:
@@ -123,5 +138,59 @@ def display_fav_number():
 
 display_fav_number()
 
-# 10-13
+# 10-13, 10-14
+def get_stored_info(user_path):
+  """
+  Obtains any stored user information.
+  """
+  if user_path.exists():
+    user_contents = user_path.read_text()
+    info = json.loads(user_contents)
+    return info
+  else:
+    return None
 
+def obtain_info(user_path):
+	"""
+  Asks for new info and inputs them into a JSON.
+  """
+	username = input("What is your name? ")
+	favorite_city = input("What's one of your favorite cities? ")
+	pet_peeve = input("What's one of your pet peeves? ")
+	info = {
+		"username": username,
+		"favorite_city": favorite_city,
+		"pet_peeve": pet_peeve
+  }
+	contents = json.dumps(info)
+	user_path.write_text(contents)
+	return info
+
+def get_new_info(user_path):
+  """
+  Grabs new info from the user and prints them out.
+  """
+  info = obtain_info(user_path)
+  print(f"We'll remember you when you come back, {info['username']}!")
+  print(f"You said your favorite city is {info['favorite_city']}!")
+  print(f"And your pet peeve is: {info['pet_peeve']}")
+
+def greet_user():
+  """
+  Greets the user by checking if there is info inside the JSON file, or 
+  creating new info by asking the user for some input.
+  """
+  path = Path('Chapters 10-11/10/user_info.json')
+  info = get_stored_info(path)
+  if info:
+    correct_user = input(f"Is {info['username']} the correct user? Type 'y'/'n': ")
+    if correct_user.lower() == "y":
+      print(f"Welcome back, {info['username']}!")
+      print(f"Your favorite city is {info['favorite_city']}.")
+      print(f"Your pet peeve: {info['pet_peeve']}")
+    else:
+      get_new_info(path)
+  else:
+    get_new_info(path)
+		
+greet_user()
