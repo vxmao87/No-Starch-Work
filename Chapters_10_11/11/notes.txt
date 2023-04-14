@@ -1,0 +1,52 @@
+Notes:
+
+pytest is an example of a third-party package that needs to be installed 
+manually. This allows the package to update on a timeline independent of the
+language itself. Some of these third-party packages can be part of the standard
+Python library and update along with the language itself.
+
+Run 'python3.11 -m pip install --upgrade pip' to update the pip package.
+Then run 'python3.11 -m pip install --user pytest' to install pytest.
+
+Unit tests verify that one aspect of a function's behavior is correct.
+
+A test case is a collection of unit tests that together prove that a function
+behaves as it's supposed to.
+
+It's good to have full coverage for a test case, where full coverage means you
+have unit tests covering all the possible ways you can use that function.
+
+We basically make assertions about our output and use that to see if our test
+succeeds or fails. They're basically claims about a condition.
+
+Every test file for a file needs to go like 'test_<filename>.py' for any file
+<filename>.py. Every function that needs to be run through pytest will also
+need to start with 'test_'.
+
+To run the test, you'll need to cd into the directory where your file is
+located, then run 'python3.11c -m pytest' on it.
+
+MAKE SURE YOUR PROGRAM AND THE FUNCTION(S) YOU WANT TO TEST ARE IN SEPARATE
+FILES TO AVOID ANY ERRORS!!!!!
+
+If your tests fail, edit the code you're working on, NOT the tests themselves.
+After that, you can add in more new tests to achieve full coverage!
+
+Anything that's classified as a conditional can be used in your assertions for
+these tests.
+
+pytest has a decorator you can use called '@pytest.fixture' to make a fixture.
+This will need to be imported into the file as 'import pytest'.
+
+A fixture is something that helps set up a test environment. It means creating
+a resource thats used by more than one test.
+
+A decorator is a directive placed just BEFORE a function definition to change
+the way it behaves.
+
+When a parameter in a test function matches the name of a function with the 
+'@pytest.fixture' decorator, the fixture runs automatically and the return value
+will be passed to the test function.
+
+Fixtures can dramatically improve readability of your code if the resource it
+carries is being used in many places inside the test file.
