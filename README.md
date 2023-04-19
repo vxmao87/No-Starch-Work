@@ -1,3 +1,3 @@
-# Python-Crash-Course
+# No-Starch-Work
 
-A repo for code and work in Python Crash Course by Eric Matthes. TBD.
+A repo for code and work from books published at No Starch Press.
