@@ -131,3 +131,5 @@ dmypy.json
 
 .vscode
 resources.txt
+
+.idea
