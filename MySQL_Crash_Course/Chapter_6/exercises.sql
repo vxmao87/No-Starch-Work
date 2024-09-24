@@ -128,3 +128,81 @@ FROM open_tourist_attraction o
 JOIN capital_city c
 ON c.city_id = o.attraction_city_id
 AND c.city_name = "Toronto";
+
+create database attire;
+
+use attire;
+
+create table employee
+	(
+	employee_id		int,
+	employee_name	varchar(100),
+	position_name	varchar(100)
+	);
+	
+insert into employee(employee_id, employee_name, position_name) values (1, 'Benedict', 'Pope');
+insert into employee(employee_id, employee_name, position_name) values (2, 'Garth', 'Singer');
+insert into employee(employee_id, employee_name, position_name) values (3, 'Francis', 'Pope');
+
+create table wardrobe
+	(
+	employee_id	int,
+	hat_size	numeric(4,2)
+	);
+
+insert into wardrobe (employee_id, hat_size) values (1, 8.25);
+insert into wardrobe (employee_id, hat_size) values (2, 7.50);
+insert into wardrobe (employee_id, hat_size) values (3, 6.75);
+
+-- 6-5
+-- SELECT employee_id,
+-- 	   hat_size
+-- FROM wardrobe
+-- WHERE employee_id =
+-- (
+-- 	SELECT employee_id
+--     FROM employee
+--     WHERE position_name = "Pope"
+-- );
+SELECT employee_id,
+	   hat_size
+FROM wardrobe
+WHERE employee_id IN
+(
+	SELECT employee_id
+    FROM employee
+    WHERE position_name = "Pope"
+);
+/*
+The query above was fixed by changing '=' ti 'IN'. Because Employee #3 was added recently
+before the query was ran again, the error occurred because '=' implies that the subquery
+inside the parenthesis can return one and only one row.
+*/
+
+create database monarchy;
+
+use monarchy;
+
+create table royal_family
+(
+	name		varchar(200),
+	birthdate	date
+);
+
+insert into royal_family (name, birthdate) values ('Prince Louis of Cambridge', '2018-04-23');
+insert into royal_family (name, birthdate) values ('Princess Charlotte of Cambridge', '2015-05-02');
+insert into royal_family (name, birthdate) values ('Prince George of Cambridge', '2013-07-22');
+insert into royal_family (name, birthdate) values ('Prince William, Duke of Cambridge', '1982-06-21');
+insert into royal_family (name, birthdate) values ('Catherine, Duchess of Cambridge', '1982-01-09');
+insert into royal_family (name, birthdate) values ('Charles, Prince of Whales','1948-11-14');
+insert into royal_family (name, birthdate) values ('Queen Elizabeth II', '1926-04-21');
+insert into royal_family (name, birthdate) values ('Prince Andrew, Duke of York', '1960-02-19');
+
+-- 6-6
+SELECT * FROM royal_family ORDER BY birthdate;
+
+-- 6-7
+SELECT * FROM royal_family ORDER BY birthdate LIMIT 1;
+
+-- 6-8
+SELECT * FROM royal_family ORDER BY birthdate DESC LIMIT 3;
